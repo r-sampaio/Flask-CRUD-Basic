@@ -10,4 +10,4 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from .views import cliente_view
-from .models import cliente_models
+from .models import cliente_model
