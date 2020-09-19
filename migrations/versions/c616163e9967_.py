@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 329617326065
+Revision ID: c616163e9967
 Revises:
-Create Date: 2020-09-17 00:03:41.088094
+Create Date: 2020-09-18 21:17:58.872820
 
 """
 import sqlalchemy_utils
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 # revision identifiers, used by Alembic.
 from app.models.cliente_model import Cliente
 
-revision = '329617326065'
+revision = 'c616163e9967'
 down_revision = None
 branch_labels = None
 depends_on = None
