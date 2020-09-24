@@ -1,6 +1,7 @@
 from app import db
 from sqlalchemy_utils import ChoiceType
 
+
 class Cliente(db.Model):
     __tablename__ = "clientes"
     
