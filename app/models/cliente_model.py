@@ -1,6 +1,6 @@
 from app import db
 from sqlalchemy_utils import ChoiceType
-from flask import FlaskForm
+from flask_wtf import FlaskForm
 
 class Cliente(db.Model):
     __tablename__ = "clientes"
