@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from app.forms import cliente_form
 from app import db
 
@@ -49,3 +49,41 @@ def listar_cliente(id):
     cliente = cliente_model.Cliente.query.filter_by(id=id).first()
     
     return render_template("clientes/lista_cliente.html", cliente=cliente)
+
+@app.route("/editar_cliente/<int:id>", methods=["POST", "GET"])
+def editar_cliente(id):
+    cliente = cliente_model.Cliente.query.filter_by(id=id).first()
+    form = cliente_form.ClienteForm(obj=cliente)
+    if form.validate_on_submit():
+        nome = form.nome.data
+        email = form.email.data
+        data_nascimento = form.data_nascimento.data
+        profissao = form.profissao.data
+        sexo = form.sexo.data
+        
+        cliente.nome = nome
+        cliente.email = email
+        cliente.data_nascimento = data_nascimento
+        cliente.profissao = profissao
+        cliente.sexo = sexo
+        
+        try:
+            db.session.commit()
+            return redirect(url_for("listar_clientes"))
+        except:
+            print('O Cliente não foi editado')
+        
+    return render_template("clientes/form.html", form=form)
+
+@app.route("/remover_cliente/<int:id>", methods=["POST", "GET"])
+def remover_cliente(id):
+    cliente = cliente_model.Cliente.query.filter_by(id=id).first()
+    if request.method == "POST":
+        try:
+            db.session.delete(cliente)
+            db.session.commit()
+            return redirect(url_for("listar_clientes"))
+        except:
+            print("Erro ao remover o cliente")
+    
+    return render_template("clientes/remover_cliente.html", cliente=cliente)
